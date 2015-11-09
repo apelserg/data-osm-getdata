@@ -15,7 +15,7 @@ namespace osm
 {
     class Program
     {
-        static string dirIn = @".\in\"; // @"D:\zzz-osm\in"; // @".\in\"; //@"C:\zzz-osm-uk\zipGB\"; //@"d:\zzz-osmgeojson\"; // где лежат файлы (*.bz2)
+        static string dirIn = @".\in\"; // где лежат файлы (*.bz2)
         static string dirOut = @".\out\"; // куда сохранять результат (если директории нет - создаётся автоматически)
 
         static string fileLog = "osmnode.log"; // журнал
