@@ -132,7 +132,7 @@ namespace osm
                 //
                 OSM_WriteLog(fileLog, "===========================");
                 OSM_WriteLog(fileLog, String.Format("== Start (check dupls: {0})", useIndexedCheck));
-                OSM_WriteLog(fileLog, "== Find: National Parks");
+                OSM_WriteLog(fileLog, "== Find: Deserts");
                 OSM_WriteLog(fileLog, "===========================");
 
                 OSM_WriteFile(fileOutWayGeojsonNpark, geojsonHeader); // заголовок GEOJSON
@@ -231,24 +231,31 @@ namespace osm
             if (nodeId < minNode) minNode = nodeId;
             else if (nodeId > maxNode) maxNode = nodeId;
 
-            // не обрабатывать дубликаты (все встреченные)
+            // не обрабатывать дубликаты
             //
             if (useIndexedCheck)
             {
                 byte nodeStatus = OSM_NodeIdxGet(nodeId);
 
+                // nodeStatus == 0 (значит НЕ входит в состав WAY)
+                //
                 if (nodeStatus == 0) // не обрабатывать ненужные значения
                     return;
+
+                // nodeStatus > 1 (значит это дубликат)
+                //
                 else if (nodeStatus > 1)  // не обрабатывать дубликаты
                 {
                     OSM_NodeIdxAdd(nodeId);
                     return;
                 }
 
-                OSM_NodeIdxAdd(nodeId); // nodeStatus == 1
+                // nodeStatus == 1 (значит входит в состав WAY и ещё не был обработан)
+                //
+                OSM_NodeIdxAdd(nodeId);
             }
 
-            // if (wayToNodeList.Exists(x => x.NodeId == NodeId)) // ускоряет это или нет?
+            // if (wayToNodeList.Exists(x => x.NodeId == nodeId)) // ускоряет это или нет?
             {
                 foreach (WayToNodeItem wayToNodeItem in wayToNodeList)
                 {
@@ -257,52 +264,57 @@ namespace osm
                         wayToNodeItem.Lat = Double.Parse(xmlDoc.DocumentElement.Attributes["lat"].Value); // ["lat"] = [1]
                         wayToNodeItem.Lon = Double.Parse(xmlDoc.DocumentElement.Attributes["lon"].Value); // ["lon"] = [2]
 
-                        // собрать все атарибуты NODE (если есть)
+                        // если node id встретилось в первый раз - вычислить атрибуты и записать
                         //
-                        string nodeType = "No type";
-                        string nodeName = "No name";
-                        string nodeNameEn = nodeName;
-                        string nodeNameRu = nodeName;
-                        string nodeAttrs = "\"Attrs\":\"No\"";
-
-                        bool isAttrs = false;
-
-                        foreach (XmlNode nodeTag in xmlDoc.DocumentElement.ChildNodes)
+                        if (!nodeAttrList.Exists(x => x.NodeId == nodeId))
                         {
-                            if (nodeTag.Name == "tag")
+                            // собрать все атарибуты NODE (если есть)
+                            //
+                            string nodeType = "No type";
+                            string nodeName = "No name";
+                            string nodeNameEn = nodeName;
+                            string nodeNameRu = nodeName;
+                            string nodeAttrs = "\"Attrs\":\"No\"";
+
+                            bool isAttrs = false;
+
+                            foreach (XmlNode nodeTag in xmlDoc.DocumentElement.ChildNodes)
                             {
-                                if (isAttrs) nodeAttrs += ",";
-                                else nodeAttrs = String.Empty;
+                                if (nodeTag.Name == "tag")
+                                {
+                                    if (isAttrs) nodeAttrs += ",";
+                                    else nodeAttrs = String.Empty;
 
-                                isAttrs = true;
+                                    isAttrs = true;
 
-                                nodeAttrs += String.Format("\"{0}\":\"{1}\"", nodeTag.Attributes["k"].Value, nodeTag.Attributes["v"].Value.Replace('\"', '\''));
+                                    nodeAttrs += String.Format("\"{0}\":\"{1}\"", nodeTag.Attributes["k"].Value, nodeTag.Attributes["v"].Value.Replace('\"', '\''));
 
-                                if (nodeTag.Attributes["k"].Value == "name")
-                                    nodeName = nodeTag.Attributes["v"].Value.Replace('\"', '\'');
-                                else if (nodeTag.Attributes["k"].Value == "name:en")
-                                    nodeNameEn = nodeTag.Attributes["v"].Value.Replace('\"', '\'');
-                                else if (nodeTag.Attributes["k"].Value == "name:ru")
-                                    nodeNameRu = nodeTag.Attributes["v"].Value.Replace('\"', '\'');
+                                    if (nodeTag.Attributes["k"].Value == "name")
+                                        nodeName = nodeTag.Attributes["v"].Value.Replace('\"', '\'');
+                                    else if (nodeTag.Attributes["k"].Value == "name:en")
+                                        nodeNameEn = nodeTag.Attributes["v"].Value.Replace('\"', '\'');
+                                    else if (nodeTag.Attributes["k"].Value == "name:ru")
+                                        nodeNameRu = nodeTag.Attributes["v"].Value.Replace('\"', '\'');
+                                }
                             }
-                        }
 
-                        if (isAttrs)
-                        {
-                            NodeAttrItem nodeAttrItem = new NodeAttrItem();
+                            if (isAttrs)
+                            {
+                                NodeAttrItem nodeAttrItem = new NodeAttrItem();
 
-                            nodeAttrItem.NodeId = nodeId;
-                            nodeAttrItem.Lat = wayToNodeItem.Lat;
-                            nodeAttrItem.Lon = wayToNodeItem.Lon;
-                            nodeAttrItem.Type = nodeType;
-                            nodeAttrItem.Name = nodeName;
-                            nodeAttrItem.NameEn = nodeNameEn;
-                            nodeAttrItem.NameRu = nodeNameRu;
-                            nodeAttrItem.Attrs = nodeAttrs;
+                                nodeAttrItem.NodeId = nodeId;
+                                nodeAttrItem.Lat = wayToNodeItem.Lat;
+                                nodeAttrItem.Lon = wayToNodeItem.Lon;
+                                nodeAttrItem.Type = nodeType;
+                                nodeAttrItem.Name = nodeName;
+                                nodeAttrItem.NameEn = nodeNameEn;
+                                nodeAttrItem.NameRu = nodeNameRu;
+                                nodeAttrItem.Attrs = nodeAttrs;
 
-                            nodeAttrList.Add(nodeAttrItem);
+                                nodeAttrList.Add(nodeAttrItem);
 
-                            cntNodeNpark++;
+                                cntNodeNpark++;
+                            }
                         }
                     }
                 }
@@ -330,8 +342,11 @@ namespace osm
 
             // не обрабатывать дубликаты (все встреченные)
             //
-            //if (checkDupl && OSM_WayIdxAdd(wayId) > 1) // дубликаты не обрабатывать
+            //if (useIndexedCheck)
+            //{
+            //    if (OSM_WayIdxAdd(wayId) > 1) // дубликаты не обрабатывать
             //        return;
+            //}
 
             foreach (XmlNode wayTag in xmlDoc.DocumentElement.ChildNodes)
             {
@@ -339,59 +354,66 @@ namespace osm
                 {
                     // не обрабатывать дубликаты (только для поисковых значений)
                     //
-                    if (useIndexedCheck && OSM_WayIdxAdd(wayId) > 1)
-                        return;
+                    if (useIndexedCheck)
+                    {
+                        if(OSM_WayIdxAdd(wayId) > 1)
+                            return;
+                    }
 
                     // добавить WAY
                     //
-                    bool isAttrs = false;
-
-                    WayAttrItem wayAttrItem = new WayAttrItem();
-
-                    wayAttrItem.WayId = wayId;
-                    wayAttrItem.Type = wayTag.Attributes["v"].Value; // ["v"] = [1]
-                    wayAttrItem.Name = "No name";
-                    wayAttrItem.NameEn = wayAttrItem.Name;
-                    wayAttrItem.NameRu = wayAttrItem.Name;
-                    wayAttrItem.Attrs = "\"Attrs\":\"No\"";
-
-                    foreach (XmlNode wayNd in xmlDoc.DocumentElement.ChildNodes)
+                    if (!wayToNodeList.Exists(x => x.WayId == wayId))
                     {
-                        if (wayNd.Name == "nd")
+                        bool isAttrs = false;
+
+                        WayAttrItem wayAttrItem = new WayAttrItem();
+
+                        wayAttrItem.WayId = wayId;
+                        wayAttrItem.Type = wayTag.Attributes["v"].Value; // ["v"] = [1]
+                        wayAttrItem.Name = "No name";
+                        wayAttrItem.NameEn = wayAttrItem.Name;
+                        wayAttrItem.NameRu = wayAttrItem.Name;
+                        wayAttrItem.Attrs = "\"Attrs\":\"No\"";
+
+                        foreach (XmlNode wayNd in xmlDoc.DocumentElement.ChildNodes)
                         {
-                            long nodeId = Int64.Parse(wayNd.Attributes["ref"].Value); // ["ref"] = [0]
+                            if (wayNd.Name == "nd")
+                            {
+                                long nodeId = Int64.Parse(wayNd.Attributes["ref"].Value); // ["ref"] = [0]
 
-                            OSM_NodeIdxSet(nodeId);
+                                if (useIndexedCheck)
+                                    OSM_NodeIdxSet(nodeId);
 
-                            WayToNodeItem wayToNodeItem = new WayToNodeItem();
+                                WayToNodeItem wayToNodeItem = new WayToNodeItem();
 
-                            wayToNodeItem.WayId = wayId;
-                            wayToNodeItem.NodeId = nodeId;
+                                wayToNodeItem.WayId = wayId;
+                                wayToNodeItem.NodeId = nodeId;
 
-                            wayToNodeList.Add(wayToNodeItem);
+                                wayToNodeList.Add(wayToNodeItem);
+                            }
+                            else if (wayNd.Name == "tag") // собрать все аттрибуты WAY
+                            {
+                                if (isAttrs) wayAttrItem.Attrs += ",";
+                                else wayAttrItem.Attrs = String.Empty;
+
+                                isAttrs = true;
+
+                                wayAttrItem.Attrs += String.Format("\"{0}\":\"{1}\"", wayNd.Attributes["k"].Value, wayNd.Attributes["v"].Value.Replace('\"', '\''));
+
+                                if (wayNd.Attributes["k"].Value == "name")
+                                    wayAttrItem.Name = wayNd.Attributes["v"].Value.Replace('\"', '\'');
+                                else if (wayNd.Attributes["k"].Value == "name:en")
+                                    wayAttrItem.NameEn = wayNd.Attributes["v"].Value.Replace('\"', '\'');
+                                else if (wayNd.Attributes["k"].Value == "name:ru")
+                                    wayAttrItem.NameRu = wayNd.Attributes["v"].Value.Replace('\"', '\'');
+                            }
                         }
-                        else if (wayNd.Name == "tag") // собрать все аттрибуты WAY
-                        {
-                            if (isAttrs) wayAttrItem.Attrs += ",";
-                            else wayAttrItem.Attrs = String.Empty;
 
-                            isAttrs = true;
+                        if (isAttrs)
+                            wayAttrList.Add(wayAttrItem);
 
-                            wayAttrItem.Attrs += String.Format("\"{0}\":\"{1}\"", wayNd.Attributes["k"].Value, wayNd.Attributes["v"].Value.Replace('\"', '\''));
-
-                            if (wayNd.Attributes["k"].Value == "name")
-                                wayAttrItem.Name = wayNd.Attributes["v"].Value.Replace('\"', '\'');
-                            else if (wayNd.Attributes["k"].Value == "name:en")
-                                wayAttrItem.NameEn = wayNd.Attributes["v"].Value.Replace('\"', '\'');
-                            else if (wayNd.Attributes["k"].Value == "name:ru")
-                                wayAttrItem.NameRu = wayNd.Attributes["v"].Value.Replace('\"', '\'');
-                        }
+                        cntWayNpark++;
                     }
-
-                    if (isAttrs)
-                        wayAttrList.Add(wayAttrItem);
-
-                    cntWayNpark++;
                 }
             }
         }

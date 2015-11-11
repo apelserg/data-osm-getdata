@@ -218,8 +218,11 @@ namespace osm
 
             // не обрабатывать дубликаты (все встреченные)
             //
-            // if (checkDupl && OSM_NodeIdxAdd(nodeId) > 1)
-            //    return;
+            //if (useIndexedCheck)
+            //{
+            //    if (OSM_NodeIdxAdd(nodeId) > 1)
+            //        return;
+            //}
 
             foreach (XmlNode nodeTag in xmlDoc.DocumentElement.ChildNodes)
             {
@@ -247,8 +250,11 @@ namespace osm
             {
                 // не обрабатывать дубликаты (только для поисковых значений)
                 //
-                if (useIndexedCheck && OSM_NodeIdxAdd(nodeId) > 1)
-                    return;
+                if (useIndexedCheck)
+                {
+                    if(OSM_NodeIdxAdd(nodeId) > 1)
+                        return;
+                }
 
                 string strAttrName = "No data";
                 string strAttrNameEn = strAttrName;
