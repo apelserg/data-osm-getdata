@@ -1,0 +1,161 @@
+[12:29:43] ===========================
+[12:29:43] == Start (check dupls: True)
+[12:29:43] == Find: Country, City ( population >= 1000000 ), Volcano
+[12:29:43] ===========================
+[12:29:43] Start File: D:\zzz-osm\in\africa-latest.osm.bz2
+[12:30:04] Processed Nodes: 1000000
+[12:30:21] Processed Nodes: 2000000
+[12:30:37] Processed Nodes: 3000000
+[12:30:54] Processed Nodes: 4000000
+[12:31:11] Processed Nodes: 5000000
+[12:31:30] Processed Nodes: 6000000
+[12:31:47] Processed Nodes: 7000000
+[12:32:05] Processed Nodes: 8000000
+[12:32:20] Processed Nodes: 9000000
+[12:32:37] Processed Nodes: 10000000
+[12:32:55] Processed Nodes: 11000000
+[12:33:11] Processed Nodes: 12000000
+[12:33:27] Processed Nodes: 13000000
+[12:33:43] Processed Nodes: 14000000
+[12:33:58] Processed Nodes: 15000000
+[12:34:14] Processed Nodes: 16000000
+[12:34:29] Processed Nodes: 17000000
+[12:34:44] Processed Nodes: 18000000
+[12:34:59] Processed Nodes: 19000000
+[12:35:14] Processed Nodes: 20000000
+[12:35:29] Processed Nodes: 21000000
+[12:35:44] Processed Nodes: 22000000
+[12:35:58] Processed Nodes: 23000000
+[12:36:13] Processed Nodes: 24000000
+[12:36:28] Processed Nodes: 25000000
+[12:36:43] Processed Nodes: 26000000
+[12:36:58] Processed Nodes: 27000000
+[12:37:14] Processed Nodes: 28000000
+[12:37:28] Processed Nodes: 29000000
+[12:37:44] Processed Nodes: 30000000
+[12:37:59] Processed Nodes: 31000000
+[12:38:14] Processed Nodes: 32000000
+[12:38:29] Processed Nodes: 33000000
+[12:38:44] Processed Nodes: 34000000
+[12:38:59] Processed Nodes: 35000000
+[12:39:14] Processed Nodes: 36000000
+[12:39:29] Processed Nodes: 37000000
+[12:39:44] Processed Nodes: 38000000
+[12:39:59] Processed Nodes: 39000000
+[12:40:14] Processed Nodes: 40000000
+[12:40:30] Processed Nodes: 41000000
+[12:40:45] Processed Nodes: 42000000
+[12:41:00] Processed Nodes: 43000000
+[12:41:16] Processed Nodes: 44000000
+[12:41:31] Processed Nodes: 45000000
+[12:41:46] Processed Nodes: 46000000
+[12:42:02] Processed Nodes: 47000000
+[12:42:17] Processed Nodes: 48000000
+[12:42:33] Processed Nodes: 49000000
+[12:42:48] Processed Nodes: 50000000
+[12:43:04] Processed Nodes: 51000000
+[12:43:18] Processed Nodes: 52000000
+[12:43:33] Processed Nodes: 53000000
+[12:43:49] Processed Nodes: 54000000
+[12:44:06] Processed Nodes: 55000000
+[12:44:21] Processed Nodes: 56000000
+[12:44:37] Processed Nodes: 57000000
+[12:44:52] Processed Nodes: 58000000
+[12:45:08] Processed Nodes: 59000000
+[12:45:23] Processed Nodes: 60000000
+[12:45:38] Processed Nodes: 61000000
+[12:45:54] Processed Nodes: 62000000
+[12:46:10] Processed Nodes: 63000000
+[12:46:26] Processed Nodes: 64000000
+[12:46:42] Processed Nodes: 65000000
+[12:46:57] Processed Nodes: 66000000
+[12:47:15] Processed Nodes: 67000000
+[12:47:30] Processed Nodes: 68000000
+[12:47:46] Processed Nodes: 69000000
+[12:48:02] Processed Nodes: 70000000
+[12:48:17] Processed Nodes: 71000000
+[12:48:32] Processed Nodes: 72000000
+[12:48:47] Processed Nodes: 73000000
+[12:49:05] Processed Nodes: 74000000
+[12:49:22] Processed Nodes: 75000000
+[12:49:39] Processed Nodes: 76000000
+[12:49:55] Processed Nodes: 77000000
+[12:50:10] Processed Nodes: 78000000
+[12:50:24] Processed Nodes: 79000000
+[12:50:42] Processed Nodes: 80000000
+[12:50:57] Processed Nodes: 81000000
+[12:51:13] Processed Nodes: 82000000
+[12:51:29] Processed Nodes: 83000000
+[12:51:45] Processed Nodes: 84000000
+[12:52:00] Processed Nodes: 85000000
+[12:52:16] Processed Nodes: 86000000
+[12:52:33] Processed Nodes: 87000000
+[12:52:51] Processed Nodes: 88000000
+[12:53:07] Processed Nodes: 89000000
+[12:53:23] Processed Nodes: 90000000
+[12:53:39] Processed Nodes: 91000000
+[12:53:55] Processed Nodes: 92000000
+[12:54:11] Processed Nodes: 93000000
+[12:54:28] Processed Nodes: 94000000
+[12:54:45] Processed Nodes: 95000000
+[12:55:01] Processed Nodes: 96000000
+[12:55:18] Processed Nodes: 97000000
+[12:55:35] Processed Nodes: 98000000
+[12:55:52] Processed Nodes: 99000000
+[12:56:09] Processed Nodes: 100000000
+[12:56:26] Processed Nodes: 101000000
+[12:56:42] Processed Nodes: 102000000
+[12:56:58] Processed Nodes: 103000000
+[12:57:15] Processed Nodes: 104000000
+[12:57:32] Processed Nodes: 105000000
+[12:57:48] Processed Nodes: 106000000
+[12:58:05] Processed Nodes: 107000000
+[12:58:22] Processed Nodes: 108000000
+[12:58:39] Processed Nodes: 109000000
+[12:58:55] Processed Nodes: 110000000
+[12:59:11] Processed Nodes: 111000000
+[12:59:27] Processed Nodes: 112000000
+[12:59:43] Processed Nodes: 113000000
+[12:59:58] Processed Nodes: 114000000
+[01:00:13] Processed Nodes: 115000000
+[01:00:28] Processed Nodes: 116000000
+[01:00:44] Processed Nodes: 117000000
+[01:01:00] Processed Nodes: 118000000
+[01:01:17] Processed Nodes: 119000000
+[01:01:33] Processed Nodes: 120000000
+[01:01:50] Processed Nodes: 121000000
+[01:02:07] Processed Nodes: 122000000
+[01:02:23] Processed Nodes: 123000000
+[01:02:39] Processed Nodes: 124000000
+[01:02:55] Processed Nodes: 125000000
+[01:03:12] Processed Nodes: 126000000
+[01:03:28] Processed Nodes: 127000000
+[01:03:43] Processed Nodes: 128000000
+[01:04:40] Processed Ways: 1000000
+[01:05:27] Processed Ways: 2000000
+[01:06:09] Processed Ways: 3000000
+[01:06:52] Processed Ways: 4000000
+[01:07:37] Processed Ways: 5000000
+[01:08:18] Processed Ways: 6000000
+[01:08:58] Processed Ways: 7000000
+[01:09:35] Processed Ways: 8000000
+[01:10:15] Processed Ways: 9000000
+[01:10:54] Processed Ways: 10000000
+[01:11:35] Processed Ways: 11000000
+[01:12:15] Processed Ways: 12000000
+[01:12:39] COUNTRY = Nodes: 56 ; Total Nodes: 128233353
+[01:12:39] CITY = Nodes: 51 ; Total Nodes: 128233353
+[01:12:39] VOLCANO = Nodes: 1072 ; Total Nodes: 128233353
+[01:12:39] End File: D:\zzz-osm\in\africa-latest.osm.bz2
+[01:12:39] ==
+[01:12:40] Count dupls
+[01:12:53] ===========================
+[01:12:53] == Total Files (*.bz2): 1 ; Total Nodes: 128233353 ; Total Ways: 12496800 ; Total Relations: 64013
+[01:12:53] == Country: 56 ; City ( population >= 1000000 ): 51 ; Volcano: 1072
+[01:12:53] == Min id Node: 1894576 ; Max id Node: 3758228331
+[01:12:53] == Min id Way: 3715718 ; Max id Way: 372269495
+[01:12:53] == Min id Relation: 892 ; Max id Relation: 5535421
+[01:12:53] == Dupls: 0
+[01:12:53] ===========================
+[01:12:53] == End
+[01:12:53] ===========================

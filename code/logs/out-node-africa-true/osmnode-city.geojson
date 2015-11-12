@@ -1,0 +1,257 @@
+{"type":"FeatureCollection","features":[
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[25.5327401,-33.9434595]},
+"properties":{"Type":"city","Name":"Port Elizabeth","Name(en)":"No data","Name(ru)":"Порт-Элизабет","Population":1050000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-7.6176293,33.5939157]},
+"properties":{"Type":"city","Name":"Casablanca الدار البيضاء","Name(en)":"Casablanca","Name(ru)":"Касабланка","Population":3100000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-5.5678716,33.8850849]},
+"properties":{"Type":"city","Name":"Meknès  مكناس ⵎⴽⵏⴰⵙ","Name(en)":"No data","Name(ru)":"Мекнес","Population":1000000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[15.3125974,-4.3217055]},
+"properties":{"Type":"city","Name":"Kinshasa","Name(en)":"No data","Name(ru)":"Киншаса","Population":9046000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[13.2436665,-8.8271656]},
+"properties":{"Type":"city","Name":"Luanda","Name(en)":"No data","Name(ru)":"Луанда","Population":5172900}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-8.0003371,12.6493194]},
+"properties":{"Type":"city","Name":"Bamako","Name(en)":"No data","Name(ru)":"Бамако","Population":1809106}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[27.4826264,-11.6642316]},
+"properties":{"Type":"city","Name":"Lubumbashi","Name(en)":"Lubumbashi","Name(ru)":"Лубумбаши","Population":1139064}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-10.7977882,6.3280343]},
+"properties":{"Type":"city","Name":"Monrovia","Name(en)":"No data","Name(ru)":"Монровия","Population":1010970}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[28.2813812,-15.4166967]},
+"properties":{"Type":"city","Name":"Lusaka","Name(en)":"No data","Name(ru)":"Лусака","Population":1742979}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[31.0099095,-29.8618254]},
+"properties":{"Type":"city","Name":"Durban","Name(en)":"No data","Name(ru)":"Дурбан","Population":3460000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-1.5270853,12.3681481]},
+"properties":{"Type":"city","Name":"Ouagadougou","Name(en)":"No data","Name(ru)":"Уагадугу","Population":1475223}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[29.8943785,31.1990035]},
+"properties":{"Type":"city","Name":"الإسكندرية","Name(en)":"Alexandria","Name(ru)":"Александрия","Population":4546231}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[39.2803756,-6.8142737]},
+"properties":{"Type":"city","Name":"Dar es Salaam","Name(en)":"Dar es Salaam","Name(ru)":"Дар-эс-Салам","Population":2497940}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-17.4479377,14.6934248]},
+"properties":{"Type":"city","Name":"Dakar","Name(en)":"No data","Name(ru)":"Дакар","Population":2396800}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[27.89,-26.2227778]},
+"properties":{"Type":"city","Name":"Soweto","Name(en)":"No data","Name(ru)":"No data","Population":1270000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-13.6999235,9.5171253]},
+"properties":{"Type":"city","Name":"Conakry","Name(en)":"No data","Name(ru)":"Конакри","Population":1857153}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[7.0188527,4.7676576]},
+"properties":{"Type":"city","Name":"Port Harcourt","Name(en)":"No data","Name(ru)":"Порт-Харкорт","Population":1382592}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[3.8969928,7.3786064]},
+"properties":{"Type":"city","Name":"Ibadan","Name(en)":"No data","Name(ru)":"Ибадан","Population":2338659}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[38.7612525,9.0107934]},
+"properties":{"Type":"city","Name":"Addis Abeba","Name(en)":"No data","Name(ru)":"Аддис-Абеба","Population":3500000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-0.2057437,5.5600141]},
+"properties":{"Type":"city","Name":"Accra","Name(en)":"No data","Name(ru)":"Аккра","Population":2291352}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[32.5674498,-25.9662133]},
+"properties":{"Type":"city","Name":"Maputo","Name(en)":"No data","Name(ru)":"Мапуту","Population":1244227}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[36.8172449,-1.2832533]},
+"properties":{"Type":"city","Name":"Nairobi","Name(en)":"No data","Name(ru)":"Найроби","Population":3138295}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[13.1536509,11.8395257]},
+"properties":{"Type":"city","Name":"Maiduguri","Name(en)":"No data","Name(ru)":"Майдугури","Population":1197497}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[47.5255809,-18.9100122]},
+"properties":{"Type":"city","Name":"Antananarivo","Name(en)":"No data","Name(ru)":"Антананариву","Population":2000000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[32.5356502,15.5933247]},
+"properties":{"Type":"city","Name":"الخرطوم Khartoum","Name(en)":"Khartoum","Name(ru)":"Хартум","Population":2682431}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[31.2134513,30.0170059]},
+"properties":{"Type":"city","Name":"الجيزة","Name(en)":"Giza","Name(ru)":"Гиза","Population":2681863}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[3.3941795,6.4550575]},
+"properties":{"Type":"city","Name":"Lagos","Name(en)":"No data","Name(ru)":"Лагос","Population":10404112}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[18.4172485,-33.9289049]},
+"properties":{"Type":"city","Name":"Cape Town","Name(en)":"No data","Name(ru)":"Кейптаун","Population":3500000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[45.3385636,2.0427779]},
+"properties":{"Type":"city","Name":"Muqdisho","Name(en)":"Mogadishu","Name(ru)":"Могадишо","Population":1700000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-4.075756,5.335194]},
+"properties":{"Type":"city","Name":"Yopougon","Name(en)":"No data","Name(ru)":"No data","Population":1375020}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-1.6230404,6.698081]},
+"properties":{"Type":"city","Name":"Kumasi","Name(en)":"No data","Name(ru)":"Кумаси","Population":1517000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[28.0497222,-26.205]},
+"properties":{"Type":"city","Name":"Johannesburg","Name(en)":"Johannesburg","Name(ru)":"Йоханнесбург","Population":4435000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[31.2436663,30.0488185]},
+"properties":{"Type":"city","Name":"القاهرة","Name(en)":"Cairo","Name(ru)":"Каир","Population":9120350}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[31.0456859,-17.8317726]},
+"properties":{"Type":"city","Name":"Harare","Name(en)":"No data","Name(ru)":"Хараре","Population":1606000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-5.0133482,34.0341156]},
+"properties":{"Type":"city","Name":"Fès فاس","Name(en)":"Fes","Name(ru)":"Фес","Population":1968150}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-6.8390357,34.0223602]},
+"properties":{"Type":"city","Name":"Rabat الرباط","Name(en)":"Rabat","Name(ru)":"Рабат","Population":1650000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[3.0600655,36.775348]},
+"properties":{"Type":"city","Name":"Alger  الجزائر","Name(en)":"Algiers","Name(ru)":"Алжир","Population":3415811}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[11.5213344,3.8689867]},
+"properties":{"Type":"city","Name":"Yaoundé","Name(en)":"Yaounde","Name(ru)":"Яунде","Population":1817524}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-6.8140167,34.0448888]},
+"properties":{"Type":"city","Name":"ⵙⵍⴰ Salé سلا","Name(en)":"No data","Name(ru)":"No data","Population":1000000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[15.2712256,-4.2694407]},
+"properties":{"Type":"city","Name":"Brazzaville","Name(en)":"No data","Name(ru)":"Браззавиль","Population":1018541}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-4.0290072,5.4354869]},
+"properties":{"Type":"city","Name":"Abobo","Name(en)":"No data","Name(ru)":"No data","Population":1500000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[7.3643495,5.1127345]},
+"properties":{"Type":"city","Name":"Aba","Name(en)":"Aba","Name(ru)":"Аба","Population":1020900}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[8.5303654,11.9918671]},
+"properties":{"Type":"city","Name":"Kano","Name(en)":"No data","Name(ru)":"Кано","Population":2395375}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[9.7061284,4.0429219]},
+"properties":{"Type":"city","Name":"Douala","Name(en)":"Douala","Name(ru)":"Дуала","Population":2000000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[31.242222,30.128611]},
+"properties":{"Type":"city","Name":"شبرا الخيمة","Name(en)":"Shubra al Khayma","Name(ru)":"No data","Population":1016722}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[32.5813539,0.3177137]},
+"properties":{"Type":"city","Name":"Kampala","Name(en)":"No data","Name(ru)":"Кампала","Population":1516210}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[-4.0161066,5.3203571]},
+"properties":{"Type":"city","Name":"Abidjan","Name(en)":"Abidjan","Name(ru)":"Абиджан","Population":7567409}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[13.1777923,32.896672]},
+"properties":{"Type":"city","Name":"طرابلس","Name(en)":"Tripoli","Name(ru)":"Триполи","Population":2127000}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[32.4777311,15.6445536]},
+"properties":{"Type":"city","Name":"Omdurman أم درمان","Name(en)":"Omdurman","Name(ru)":"Омдурман","Population":2395159}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[5.6221058,6.3330586]},
+"properties":{"Type":"city","Name":"Benin City","Name(en)":"No data","Name(ru)":"Бенин-Сити","Population":1147188}
+},
+{
+"type":"Feature",
+"geometry":{"type":"Point","coordinates":[11.8503297,-4.7975373]},
+"properties":{"Type":"city","Name":"Pointe-Noire","Name(en)":"No data","Name(ru)":"Пуэнт-Нуар","Population":1100000}
+},
+{}]}
