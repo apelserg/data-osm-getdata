@@ -4,5 +4,6 @@
 
 В ./geojson - примеры результатов.
 
+Статья (OpenStreetMap как источник геоданных): http://habrahabr.ru/post/270513/
 
 E-mail: apelserg@mail.ru
