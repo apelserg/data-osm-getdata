@@ -6,9 +6,7 @@
   - osmway.cs - получить объекты-линии (пустыни)
   - osmway-buildings.cs - получить дома (постройки) с номерами домов
     (добавлено 2017.10.30)
-
-
-./geojson и ./geojson-buildings - примеры результатов
+  - ./geojson и ./geojson-buildings - примеры результатов
 
 
 PS:
