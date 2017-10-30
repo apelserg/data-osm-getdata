@@ -1,5 +1,5 @@
 ﻿// ============================
-// Обработка OSM файла - WAY (для публикации)
+// Обработка OSM файла - WAY (строения)
 // ============================
 // Разработчик: apelserg ; https://github.com/apelserg/
 // Лицензия: WTFPL
@@ -17,10 +17,10 @@ namespace osm
 {
     class Program
     {
-        static string dirIn = @".\in\"; // где лежат файлы (*.bz2)
+        static string dirIn = @".\in\";  // где лежат файлы (*.bz2)
         static string dirOut = @".\out\"; // куда сохранять результат
 
-        static string fileLog = "osmway.log"; // журнал
+        static string fileLog = "osmway-buildings.log"; // журнал
 
         static int cntFileTotal = 0; // счётчик обработанных файлов
         static long cntNodeTotal = 0; // счётчик общего количества NODE
@@ -38,8 +38,8 @@ namespace osm
 
         // Для контроля дубликатов NODE и WAY
         //
-        static bool useIndexedCheck = true; // использовать/не использовать индексный массив
-                                            // если не использовать (false), то при обработке более одного *.bz2 файла, на границах соседних областей могут появляться дубликаты
+        static bool useIndexedCheck = false; //true; //true; // использовать/не использовать индексный массив
+                                            // если не использовать (false), то при обработке более одного *.bz2 файла, на границах соседних областей могут появляться дубликаты NODE
                                             // если использовать (true), то потребуется дополнительно ~ 4 GB RAM
         static long wayIdxSize = 512 * 1024 * 1024 - 1;
         static byte[] wayIdx;
@@ -49,13 +49,13 @@ namespace osm
 
         // national_park
         //
-        static string fileOutWayCsvNpark_WayToNode = "osmway-desert(way-to-node).csv";
-        static string fileOutWayCsvNpark_WayAttrs = "osmway-desert(way-attrs).csv";
-        static string fileOutWayCsvNpark_NodeAttrs = "osmway-desert(node-attrs).csv";
-        static string fileOutWayGeojsonNpark = "osmway-desert.geojson";
+        static string fileOutWayCsvBuildings_WayToNode = "osmway-buildings(way-to-node).csv";
+        static string fileOutWayCsvBuildings_WayAttrs = "osmway-buildings(way-attrs).csv";
+        static string fileOutWayCsvBuildings_NodeAttrs = "osmway-buildings(node-attrs).csv";
+        static string fileOutWayGeoJsonBuildings = "osmway-buildings.geojson";
 
-        static long cntWayNpark = 0; // счётчик WAY [national_park]
-        static long cntNodeNpark = 0; // счётчик NODE [national_park]
+        static long cntWaybuildings = 0; // счётчик WAY [national_park]
+        static long cntNodebuildings = 0; // счётчик NODE [national_park]
 
         // структуры хранения
         //
@@ -117,10 +117,10 @@ namespace osm
                 // пересоздать выходные файлы
                 //
                 OSM_RecreateFile(fileLog); // пересоздать журнал
-                OSM_RecreateFile(fileOutWayCsvNpark_WayToNode); // пересоздать итоговый файл
-                OSM_RecreateFile(fileOutWayCsvNpark_WayAttrs);
-                OSM_RecreateFile(fileOutWayCsvNpark_NodeAttrs);
-                OSM_RecreateFile(fileOutWayGeojsonNpark);
+                OSM_RecreateFile(fileOutWayCsvBuildings_WayToNode); // пересоздать итоговый файл
+                OSM_RecreateFile(fileOutWayCsvBuildings_WayAttrs);
+                OSM_RecreateFile(fileOutWayCsvBuildings_NodeAttrs);
+                OSM_RecreateFile(fileOutWayGeoJsonBuildings);
 
                 // Контроль дубликатов
                 //
@@ -135,10 +135,10 @@ namespace osm
                 //
                 OSM_WriteLog(fileLog, "===========================");
                 OSM_WriteLog(fileLog, String.Format("== Start (check dupls: {0})", useIndexedCheck));
-                OSM_WriteLog(fileLog, "== Find: Deserts");
+                OSM_WriteLog(fileLog, "== Find: buildingss");
                 OSM_WriteLog(fileLog, "===========================");
 
-                OSM_WriteFile(fileOutWayGeojsonNpark, geojsonHeader); // заголовок GEOJSON
+                OSM_WriteFile(fileOutWayGeoJsonBuildings, geojsonHeader); // заголовок GEOJSON
 
                 foreach (string fileFullName in Directory.GetFiles(dirIn, "*.osm.bz2"))
                 {
@@ -184,7 +184,7 @@ namespace osm
                     OSM_WriteLog(fileLog, "==");
                 }
 
-                OSM_WriteFile(fileOutWayGeojsonNpark, geojsonFooter); // завершение GEOJSON
+                OSM_WriteFile(fileOutWayGeoJsonBuildings, geojsonFooter); // завершение GEOJSON
 
                 if (useIndexedCheck)
                 {
@@ -202,7 +202,7 @@ namespace osm
             {
                 OSM_WriteLog(fileLog, "===========================");
                 OSM_WriteLog(fileLog, String.Format("== Total Files (*.bz2): {0} ; Total Nodes: {1} ; Total Ways: {2}", cntFileTotal, cntNodeTotal, cntWayTotal));
-                OSM_WriteLog(fileLog, String.Format("== National Parks: Attrs Nodes: {0} ; Attrs Ways: {1} ", cntNodeNpark, cntWayNpark));
+                OSM_WriteLog(fileLog, String.Format("== Buildings: Attrs Nodes: {0} ; Attrs Ways: {1} ", cntNodebuildings, cntWaybuildings));
                 OSM_WriteLog(fileLog, String.Format("== Min Node: {0} ; Max Node: {1}", minNode, maxNode));
                 OSM_WriteLog(fileLog, String.Format("== Min Way: {0} ; Max Way: {1}", minWay, maxWay));
 
@@ -316,7 +316,7 @@ namespace osm
 
                                 nodeAttrList.Add(nodeAttrItem);
 
-                                cntNodeNpark++;
+                                cntNodebuildings++;
                             }
                         }
                     }
@@ -353,69 +353,67 @@ namespace osm
 
             foreach (XmlNode wayTag in xmlDoc.DocumentElement.ChildNodes)
             {
-                if (wayTag.Name == "tag" && wayTag.Attributes["k"].Value == "natural" && wayTag.Attributes["v"].Value == "desert") // ["k"] = [0], ["v"] = [1]
+                if (wayTag.Name == "tag" && wayTag.Attributes["k"].Value == "building" && wayTag.Attributes["v"].Value == "house") // ["k"] = [0], ["v"] = [1]
                 {
-                    // не обрабатывать дубликаты (только для поисковых значений)
-                    //
-                    if (useIndexedCheck)
                     {
-                        if(OSM_WayIdxAdd(wayId) > 1)
-                            return;
-                    }
-
-                    // добавить WAY
-                    //
-                    if (!wayToNodeList.Exists(x => x.WayId == wayId))
-                    {
-                        bool isAttrs = false;
-
-                        WayAttrItem wayAttrItem = new WayAttrItem();
-
-                        wayAttrItem.WayId = wayId;
-                        wayAttrItem.Type = wayTag.Attributes["v"].Value; // ["v"] = [1]
-                        wayAttrItem.Name = "No name";
-                        wayAttrItem.NameEn = wayAttrItem.Name;
-                        wayAttrItem.NameRu = wayAttrItem.Name;
-                        wayAttrItem.Attrs = "\"Attrs\":\"No\"";
-
-                        foreach (XmlNode wayNd in xmlDoc.DocumentElement.ChildNodes)
+                        // не обрабатывать дубликаты (только для поисковых значений)
+                        //
+                        if (useIndexedCheck)
                         {
-                            if (wayNd.Name == "nd")
+                            if (OSM_WayIdxAdd(wayId) > 1)
+                                return;
+                        }
+
+                        // добавить WAY
+                        //
+                        if (!wayToNodeList.Exists(x => x.WayId == wayId))
+                        {
+                            bool isAttrs = false;
+
+                            WayAttrItem wayAttrItem = new WayAttrItem();
+
+                            wayAttrItem.WayId = wayId;
+                            wayAttrItem.Type = wayTag.Attributes["v"].Value; // ["v"] = [1]
+                            wayAttrItem.Name = "No name";
+                            wayAttrItem.NameEn = wayAttrItem.Name;
+                            wayAttrItem.NameRu = wayAttrItem.Name;
+                            wayAttrItem.Attrs = "\"Attrs\":\"No\"";
+
+                            foreach (XmlNode wayNd in xmlDoc.DocumentElement.ChildNodes)
                             {
-                                long nodeId = Int64.Parse(wayNd.Attributes["ref"].Value); // ["ref"] = [0]
+                                if (wayNd.Name == "nd")
+                                {
+                                    long nodeId = Int64.Parse(wayNd.Attributes["ref"].Value); // ["ref"] = [0]
 
-                                if (useIndexedCheck)
-                                    OSM_NodeIdxSet(nodeId);
+                                    if (useIndexedCheck)
+                                        OSM_NodeIdxSet(nodeId);
 
-                                WayToNodeItem wayToNodeItem = new WayToNodeItem();
+                                    WayToNodeItem wayToNodeItem = new WayToNodeItem();
 
-                                wayToNodeItem.WayId = wayId;
-                                wayToNodeItem.NodeId = nodeId;
+                                    wayToNodeItem.WayId = wayId;
+                                    wayToNodeItem.NodeId = nodeId;
 
-                                wayToNodeList.Add(wayToNodeItem);
-                            }
-                            else if (wayNd.Name == "tag") // собрать все аттрибуты WAY
-                            {
-                                if (isAttrs) wayAttrItem.Attrs += ",";
-                                else wayAttrItem.Attrs = String.Empty;
+                                    wayToNodeList.Add(wayToNodeItem);
+                                }
+                                else if (wayNd.Name == "tag") // собрать все аттрибуты WAY
+                                {
+                                    if (isAttrs) wayAttrItem.Attrs += ",";
+                                    else wayAttrItem.Attrs = String.Empty;
 
-                                isAttrs = true;
+                                    isAttrs = true;
 
-                                wayAttrItem.Attrs += String.Format("\"{0}\":\"{1}\"", wayNd.Attributes["k"].Value, wayNd.Attributes["v"].Value.Replace('\"', '\''));
+                                    wayAttrItem.Attrs += String.Format("\"{0}\":\"{1}\"", wayNd.Attributes["k"].Value, wayNd.Attributes["v"].Value.Replace('\"', '\''));
 
-                                if (wayNd.Attributes["k"].Value == "name")
+                                if (wayNd.Attributes["k"].Value == "addr:housenumber")
                                     wayAttrItem.Name = wayNd.Attributes["v"].Value.Replace('\"', '\'');
-                                else if (wayNd.Attributes["k"].Value == "name:en")
-                                    wayAttrItem.NameEn = wayNd.Attributes["v"].Value.Replace('\"', '\'');
-                                else if (wayNd.Attributes["k"].Value == "name:ru")
-                                    wayAttrItem.NameRu = wayNd.Attributes["v"].Value.Replace('\"', '\'');
                             }
                         }
 
-                        if (isAttrs)
-                            wayAttrList.Add(wayAttrItem);
+                            if (isAttrs)
+                                wayAttrList.Add(wayAttrItem);
 
-                        cntWayNpark++;
+                            cntWaybuildings++;
+                        }
                     }
                 }
             }
@@ -442,7 +440,7 @@ namespace osm
                 cntToFile++;
                 if (cntToFile == sizeFileBuffer)
                 {
-                    OSM_WriteFile(fileOutWayCsvNpark_WayToNode, sbCsv.ToString());
+                    OSM_WriteFile(fileOutWayCsvBuildings_WayToNode, sbCsv.ToString());
                     sbCsv.Clear();
                     cntToFile = 0;
                 }
@@ -451,7 +449,7 @@ namespace osm
             //
             if (cntToFile > 0)
             {
-                OSM_WriteFile(fileOutWayCsvNpark_WayToNode, sbCsv.ToString());
+                OSM_WriteFile(fileOutWayCsvBuildings_WayToNode, sbCsv.ToString());
                 sbCsv.Clear();
                 cntToFile = 0;
             }
@@ -472,7 +470,7 @@ namespace osm
                 cntToFile++;
                 if (cntToFile == sizeFileBuffer)
                 {
-                    OSM_WriteFile(fileOutWayCsvNpark_WayAttrs, sbCsv.ToString());
+                    OSM_WriteFile(fileOutWayCsvBuildings_WayAttrs, sbCsv.ToString());
                     sbCsv.Clear();
                     cntToFile = 0;
                 }
@@ -481,7 +479,7 @@ namespace osm
             //
             if (cntToFile > 0)
             {
-                OSM_WriteFile(fileOutWayCsvNpark_WayAttrs, sbCsv.ToString());
+                OSM_WriteFile(fileOutWayCsvBuildings_WayAttrs, sbCsv.ToString());
                 sbCsv.Clear();
                 cntToFile = 0;
             }
@@ -504,7 +502,7 @@ namespace osm
                 cntToFile++;
                 if (cntToFile == sizeFileBuffer)
                 {
-                    OSM_WriteFile(fileOutWayCsvNpark_NodeAttrs, sbCsv.ToString());
+                    OSM_WriteFile(fileOutWayCsvBuildings_NodeAttrs, sbCsv.ToString());
                     sbCsv.Clear();
                     cntToFile = 0;
                 }
@@ -513,7 +511,7 @@ namespace osm
             //
             if (cntToFile > 0)
             {
-                OSM_WriteFile(fileOutWayCsvNpark_NodeAttrs, sbCsv.ToString());
+                OSM_WriteFile(fileOutWayCsvBuildings_NodeAttrs, sbCsv.ToString());
             }
         }
         //========
@@ -527,25 +525,28 @@ namespace osm
             string geojsonPointBegin = "{\"type\":\"Point\",\"coordinates\":";
             string geojsonPointEnd = "},";
 
-            string geojsonPolygonBegin = "{\"type\":\"Polygon\",\"coordinates\":[[";
-            string geojsonPolygonEnd = "]]}";
+            //string geojsonPolygonBegin = "{\"type\":\"Polygon\",\"coordinates\":[[";
+            //string geojsonPolygonEnd = "]]}";
+
+            string geojsonLineBegin = "{\"type\":\"LineString\",\"coordinates\":[";
+            string geojsonLineEnd = "]}";
 
             string geojsonPropBegin = Environment.NewLine + "\"properties\":{";
             string geojsonPropEnd = "}";
 
             StringBuilder sbGeojson = new StringBuilder();
 
-            // WAY Attrs (Points)
-            //
             int cntToFile = 0;
 
+            // WAY Attrs (Points)
+            //
             foreach (WayAttrItem wayAttrItem in wayAttrList)
             {
                 WayToNodeItem wayToNodeItem = wayToNodeList.Find(x => x.WayId == wayAttrItem.WayId);
 
                 if (wayToNodeItem == null)
                     OSM_WriteLog(fileLog, String.Format("WARNING: wayToNodeItem == null (wayAttrItem.WayId == {0})", wayAttrItem.WayId));
-                else
+                else if (wayAttrItem.Name != "No name")
                 {
                     sbGeojson.Append(geojsonFeatureBegin)
                         .Append(geojsonPointBegin)
@@ -553,9 +554,9 @@ namespace osm
                         .Append(geojsonPointEnd)
                         .Append(geojsonPropBegin)
                         .Append(String.Format("\"{0}\":\"{1}\",", "Type", wayAttrItem.Type))
-                        .Append(String.Format("\"{0}\":\"{1}\",", "Name", wayAttrItem.Name))
-                        .Append(String.Format("\"{0}\":\"{1}\",", "Name(en)", wayAttrItem.NameEn))
-                        .Append(String.Format("\"{0}\":\"{1}\"", "Name(ru)", wayAttrItem.NameRu))
+                        .Append(String.Format("\"{0}\":\"{1}\"", "Addr", wayAttrItem.Name))
+                        //.Append(String.Format("\"{0}\":\"{1}\",", "Name(en)", wayAttrItem.NameEn))
+                        //.Append(String.Format("\"{0}\":\"{1}\"", "Name(ru)", wayAttrItem.NameRu))
                         .Append(geojsonPropEnd)
                         .Append(geojsonFeatureEnd);
 
@@ -566,7 +567,7 @@ namespace osm
                 //
                 if (cntToFile == sizeFileBuffer)
                 {
-                    OSM_WriteFile(fileOutWayGeojsonNpark, sbGeojson.ToString());
+                    OSM_WriteFile(fileOutWayGeoJsonBuildings, sbGeojson.ToString());
                     sbGeojson.Clear();
                     cntToFile = 0;
                 }
@@ -575,7 +576,7 @@ namespace osm
             //
             if (cntToFile > 0)
             {
-                OSM_WriteFile(fileOutWayGeojsonNpark, sbGeojson.ToString());
+                OSM_WriteFile(fileOutWayGeoJsonBuildings, sbGeojson.ToString());
                 sbGeojson.Clear();
                 cntToFile = 0;
             }
@@ -588,14 +589,14 @@ namespace osm
             {
                 if (prevId == 0)
                     sbGeojson.Append(geojsonFeatureBegin)
-                        .Append(geojsonPolygonBegin);
+                        .Append(geojsonLineBegin); //Append(geojsonPolygonBegin);
                 else if (prevId == wayToNodeItem.WayId)
                     sbGeojson.Append(",");
                 else
-                    sbGeojson.Append(geojsonPolygonEnd)
+                    sbGeojson.Append(geojsonLineEnd) //Append(geojsonPolygonEnd)
                         .Append(geojsonFeatureEnd)
                         .Append(geojsonFeatureBegin)
-                        .Append(geojsonPolygonBegin);
+                        .Append(geojsonLineBegin); //.Append(geojsonPolygonBegin);
 
                 sbGeojson.Append(String.Format("[{0},{1}]", wayToNodeItem.Lon, wayToNodeItem.Lat));
 
@@ -606,7 +607,7 @@ namespace osm
                 cntToFile++;
                 if (cntToFile == sizeFileBuffer)
                 {
-                    OSM_WriteFile(fileOutWayGeojsonNpark, sbGeojson.ToString());
+                    OSM_WriteFile(fileOutWayGeoJsonBuildings, sbGeojson.ToString());
                     sbGeojson.Clear();
                     cntToFile = 0;
                 }
@@ -615,17 +616,17 @@ namespace osm
             //
             if (cntToFile > 0)
             {
-                OSM_WriteFile(fileOutWayGeojsonNpark, sbGeojson.ToString());
+                OSM_WriteFile(fileOutWayGeoJsonBuildings, sbGeojson.ToString());
                 sbGeojson.Clear();
             }
             // закрыть последний элемент POLYGON в GEOJSON и записать буфер в файл
             //
             if (prevId != 0)
             {
-                sbGeojson.Append(geojsonPolygonEnd)
+                sbGeojson.Append(geojsonLineEnd) // sbGeojson.Append(geojsonPolygonEnd)
                     .Append(geojsonFeatureEnd);
 
-                OSM_WriteFile(fileOutWayGeojsonNpark, sbGeojson.ToString());
+                OSM_WriteFile(fileOutWayGeoJsonBuildings, sbGeojson.ToString());
             }
         }
         //========

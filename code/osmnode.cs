@@ -10,6 +10,7 @@ using System;
 using System.Text;
 using System.IO;
 using System.Xml;
+using System.Globalization;
 
 namespace osm
 {
@@ -85,6 +86,8 @@ namespace osm
         {
             try
             {
+                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en-US");
+
                 string geojsonHeader = "{\"type\":\"FeatureCollection\",\"features\":[";
                 string geojsonFooter = Environment.NewLine + "{}]}";
 
